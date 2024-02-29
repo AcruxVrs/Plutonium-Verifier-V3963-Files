@@ -49,8 +49,9 @@ def check_files(main_folder, main_copy_folder, exclude_files=None, exclude_dirs=
             if any(copied_file.startswith(exclude) for exclude in exclude_files):
                 # Check if the corresponding file exists in the main folder before excluding it
                 
-                print(f"Excluded file: {copied_path}")
-                continue
+                if os.path.isfile(original_path):
+                    print(f"Excluded file: {copied_path}")
+                    continue
 
             # Create destination directory if it doesn't exist
             os.makedirs(os.path.dirname(original_path), exist_ok=True)
